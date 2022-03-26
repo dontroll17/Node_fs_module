@@ -5,7 +5,7 @@ let linesCount = 0;
 //create interface
 const rl = createInterface({
     //read file
-    input: createReadStream('lorem.txt'),
+    input: createReadStream('./text/lorem.txt'),
     //output in stdout
     output: process.stdout,
     terminal: false

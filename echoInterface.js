@@ -10,7 +10,7 @@ rl.on('line', line => {
     //cache the line
 	let copy = line;
     //write line in file
-    appendFile('stdout.txt', `${copy}\n`);
+    appendFile('./text/stdout.txt', `${copy}\n`);
 });
 
 rl.on('close', () => {

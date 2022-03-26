@@ -3,7 +3,7 @@ const { createReadStream } = require('fs');
 
 //command line argument as file path to read
 //or lorem.txt as default
-const file = process.argv[2] || 'lorem.txt';
+const file = process.argv[2] || './text/lorem.txt';
 
 const rl = createInterface({
     input: createReadStream(`${file}`),
