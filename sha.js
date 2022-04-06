@@ -3,8 +3,8 @@
 ** folder: file name, available SHA-256 value 
 ** from file in hex.
 */
-const { createReadStream, statSync } = require('fs');
-const { readdir} = require('fs/promises');
+const { createReadStream } = require('fs');
+const { readdir, stat } = require('fs/promises');
 const crypto = require('crypto');
 
 const getHah = (filename, data) => {
@@ -27,7 +27,6 @@ const readStreamPromise = (stream) => {
 }
 
 const processEntry = async(stream) => {
-    if(statSync(stream).isDirectory()) return;
     try {
         let data = await readStreamPromise(stream);
         getHah(stream, data);
@@ -40,7 +39,12 @@ const processEntry = async(stream) => {
 (async() => {
     try {
         const files = await readdir(__dirname);
-        for(let file of files){
+        const arrOfFiles = []
+        for(let i = 0; i < files.length; i++){
+        	const check = await stat(files[i])
+            if(check.isFile()) arrOfFiles.push(files[i])
+        }
+        for(let file of arrOfFiles){
             processEntry(file);
         }
     }
