@@ -39,10 +39,12 @@ const processEntry = async(stream) => {
 (async() => {
     try {
         const files = await readdir(__dirname);
-        const arrOfFiles = []
+        const arrOfFiles = [];
         for(let i = 0; i < files.length; i++){
-        	const check = await stat(files[i])
-            if(check.isFile()) arrOfFiles.push(files[i])
+        	const check = await stat(files[i]);
+            if(check.isFile()) {
+                arrOfFiles.push(files[i]);
+            }
         }
         for(let file of arrOfFiles){
             processEntry(file);
